@@ -10,7 +10,7 @@ function analyTemp (str, dset, replace = false) {
       } else {
         let key = dset[0][dset[1].findIndex((ele) => ele === body)]
         let bb1 = ` :${head}="i18n.t('${key}')"`
-        return bb1
+        return key? bb1 : word
       }
     })
   }
@@ -21,7 +21,7 @@ function analyTemp (str, dset, replace = false) {
       dset.add(word)
     } else {
       let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-      return `{{$t("${key}")}}`
+      return key ? `{{$t("${key}")}}` : word
     }
   })
   
@@ -32,7 +32,7 @@ function analyTemp (str, dset, replace = false) {
         dset.add(word)
       } else {
         let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-        return `{{$t("${key}")}}`
+        return key ? `{{$t("${key}")}}` : word
       }
     })
   }
@@ -47,7 +47,7 @@ function analyTemp (str, dset, replace = false) {
           dset.add(word)
         } else {
           let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-          return `$t("${key}")`
+          return key ? `$t("${key}")` : word
         }
       })
     }
@@ -87,7 +87,7 @@ function analyScript (str, dset, replace = false) {
         dset.add(res)
       } else {
         let key = dset[0][dset[1].findIndex((ele) => ele === res)]
-        return `i18n.t("${key}")`
+        return key ? `i18n.t("${key}")` : word
       }
     })
   }
