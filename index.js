@@ -65,8 +65,8 @@ async function replace(url, arr) {
 }
 const dirRecord = dir.getDirTree(path.join(__dirname))
 dir.deleteFolder(path.join(__dirname, './neWrite'))
-translate(dirRecord)
-replace(path.join(__dirname, './write.xlsx'), dirRecord)
+// translate(dirRecord)
+// replace(path.join(__dirname, './write.xlsx'), dirRecord)
 // 测试
-// translate([path.join(__dirname, './demo.vue')])
+translate([path.join(__dirname, './demo.vue')])
 // replace(path.join(__dirname, './write.xlsx'), [path.join(__dirname, './demo.vue')])
