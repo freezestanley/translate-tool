@@ -77,7 +77,7 @@ function analyScript (str, dset, replace = false) {
     str = 'import i18n from "@/i18n"\n' + str
   }
   
-  var reg = /('|")[^'"]*[\u4e00-\u9fa5]+[^'"]*\1/img
+  var reg = /('|")[^'"\n]*[\u4e00-\u9fa5]+[^'"]*\1/img
   while ((arr = reg.exec(str)) != null){
     // console.log(arr)
     str = str.replace(arr[0], (word) => {
