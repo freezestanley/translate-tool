@@ -8,34 +8,34 @@
   <div class="beneficiaryInfo-page">
     <div class="base-info">
       <div class="item-head">
-        <span>受益人信息</span>
+        <span>{{$t("key25")}}</span>
         <div class="selectIcon">
-          <span class="icon icon-addPerson" @click="importConnect">导入</span>
-          <span class="icon icon-scan" @click="scan">扫描</span>
+          <span class="icon icon-addPerson" @click="importConnect">{{$t("key26")}}</span>
+          <span class="icon icon-scan" @click="scan">{{$t("key27")}}</span>
         </div>
       </div>
       <ul v-if="relationship">
         <li>
-          <span class="name">姓名</span>
-          <input type="text" class="input" maxlength="30" v-model.trim="form.name" placeholder="请输入姓名"
-                 v-validate:name.initial="'required'" name="name" data-vv-as="请输入姓名"
+          <span class="name">{{$t("key28")}}</span>
+          <input type="text" class="input" maxlength="30" v-model.trim="form.name" :placeholder="i18n.t('key0')"
+                 v-validate:name.initial="'required'" name="name" :data-vv-as="i18n.t('key0')"
                  :class="{'is-danger': errors.has('name') }">
         </li>
         <li>
-          <span class="name">性别</span>
+          <span class="name">{{$t("key29")}}</span>
           <div class="_input">
             <c_gender @Click="checkgander" :gender="form.gender"></c_gender>
           </div>
         </li>
         <li>
-          <span class="name">是否投保人</span>
+          <span class="name">{{$t("key30")}}</span>
           <div class="_input">
             <!--<c_radio @Click="checkedSelf" :checked="form.self"></c_radio>-->
             <c_radioBlock v-model.trim = "form.self" :checked="false"></c_radioBlock>
           </div>
         </li>
         <li>
-          <span class="name">出生日期</span>
+          <span class="name">{{$t("key31")}}</span>
           <div class="input input_a">
             <datetime @on-change="cardtime"
                       clear-text=""
@@ -43,8 +43,8 @@
                       v-model.trim="form.birthday"
                       format="YYYY-MM-DD"
                       :title="timeTitle"
-                      confirm-text="确定"
-                      cancel-text="取消"
+                      :confirm-text="i18n.t('key1')"
+                      :cancel-text="i18n.t('key2')"
                       :start-date="cardBrith.stime"
                       :end-date="cardBrith.etime"
                       :min-year="cardBrith.minyear"
@@ -58,12 +58,12 @@
               name="birthday"
               v-model.trim="form.birthday[0]"
               v-validate
-              data-vv-as="请选择出生日期"
+              :data-vv-as="i18n.t('key3')"
               data-vv-rules="required">
           </div>
         </li>
         <li>
-          <popup-picker title="与被保险人关系" :data="relationList" @on-hide="onHide()" placeholder="请选择与被保险人关系"
+          <popup-picker :title="i18n.t('key4')" :data="relationList" @on-hide="onHide()" :placeholder="i18n.t('key5')"
                         @on-change="onChange" v-model.trim="form.relation"></popup-picker>
           <input
             class="hiddenInput"
@@ -72,15 +72,15 @@
             name="relation"
             v-model.trim="form.relation[0]"
             v-validate
-            data-vv-as="请选择与被保险人关系"
+            :data-vv-as="i18n.t('key5')"
             data-vv-rules="required">
         </li>
         <li v-if="hascardKind">
-          <span class="name">证件类型</span>
+          <span class="name">{{$t("key6")}}</span>
           <span type="text" class="input" v-if="form.cardKind">{{form.cardKind[0]}}</span>
         </li>
         <li v-else>
-          <popup-picker title="证件类型" :data="cardKindList" @on-hide="onHide('cardKind')" placeholder="请选择证件类型"
+          <popup-picker :title="i18n.t('key6')" :data="cardKindList" @on-hide="onHide('cardKind')" :placeholder="i18n.t('key7')"
                         @on-change="onChange" v-model.trim="form.cardKind"
           ></popup-picker>
           <input
@@ -90,18 +90,18 @@
             name="cardKind"
             v-model.trim="form.cardKind"
             v-validate
-            data-vv-as="请选择证件类型"
+            :data-vv-as="i18n.t('key7')"
             data-vv-rules="required">
         </li>
         <li>
-          <span class="name">证件号码</span>
+          <span class="name">{{$t("key32")}}</span>
           <span type="text" class="input" v-if="hascardKind">{{form.cardNum}}</span>
-          <input type="text" class="input" maxlength="30" v-model.trim="form.cardNum" placeholder="请输入证件号码"
-                 v-validate:cardNum.initial="'required|idcard'" data-vv-as="请输入证件号码" name="cardNum"
+          <input type="text" class="input" maxlength="30" v-model.trim="form.cardNum" :placeholder="i18n.t('key8')"
+                 v-validate:cardNum.initial="'required|idcard'" :data-vv-as="i18n.t('key8')" name="cardNum"
                  :class="{'is-danger': errors.has('cardNum') }" v-else>
         </li>
         <li>
-          <span class="name">有效期至</span>
+          <span class="name">{{$t("key33")}}</span>
           <div class="input">
             <datetime @on-change="cardtime"
                       clear-text=""
@@ -109,8 +109,8 @@
                       v-model.trim="form.indate"
                       format="YYYY-MM-DD"
                       :title="timeTitle"
-                      confirm-text="确定"
-                      cancel-text="取消"
+                      :confirm-text="i18n.t('key1')"
+                      :cancel-text="i18n.t('key2')"
                       :start-date="card.stime"
                       :end-date="card.etime"
                       :min-year="card.minyear"
@@ -124,20 +124,20 @@
               name="indate"
               v-model.trim="form.indate"
               v-validate
-              data-vv-as="请选择有效期"
+              :data-vv-as="i18n.t('key9')"
               data-vv-rules="required">
           </div>
           <div class="upload-img" @click="indate">
             <span class="icon-cricle" :class="{active: selected}"></span>
-            <span class="icon-text" :class="{'icon-text-active': selected}">长期</span>
+            <span class="icon-text" :class="{'icon-text-active': selected}">{{$t("key34")}}</span>
           </div>
         </li>
         <li v-if="hasnationality">
-          <span class="name">国籍</span>
+          <span class="name">{{$t("key10")}}</span>
           <span type="text" class="input">{{form.nationality}}</span>
         </li>
         <li v-else>
-          <popup-picker title="国籍" :data="nationalityList" @on-hide="onHide('nationality')" placeholder="请选择证件类型"
+          <popup-picker :title="i18n.t('key10')" :data="nationalityList" @on-hide="onHide('nationality')" :placeholder="i18n.t('key7')"
                         @on-change="onChange" v-model.trim="form.nationality"
           ></popup-picker>
           <input
@@ -147,11 +147,11 @@
             name="nationality"
             v-model.trim="form.nationality[0]"
             v-validate
-            data-vv-as="请选择国籍"
+            :data-vv-as="i18n.t('key11')"
             data-vv-rules="required">
         </li>
         <li>
-          <popup-picker title="受益顺序" :data="beneficialOrderList" @on-hide="onHide()" placeholder="请选择"
+          <popup-picker :title="i18n.t('key12')" :data="beneficialOrderList" @on-hide="onHide()" :placeholder="i18n.t('key13')"
                         @on-change="onChange" v-model.trim="form.beneficialOrder"
           ></popup-picker>
           <input
@@ -161,39 +161,39 @@
             name="beneficialOrder"
             v-model.trim="form.beneficialOrder[0]"
             v-validate
-            data-vv-as="请选择受益顺序"
+            :data-vv-as="i18n.t('key14')"
             data-vv-rules="required">
         </li>
         <li>
-          <span class="name">受益比例</span>
-          <input type="text" class="input" maxlength="30" v-model="form.beneficialProportion" placeholder="请输入受益比例"
-                 v-validate:beneficialProportion.initial="'required|decimal|between:0, 100'" data-vv-as="请输入受益比例" name="beneficialProportion"
+          <span class="name">{{$t("key35")}}</span>
+          <input type="text" class="input" maxlength="30" v-model="form.beneficialProportion" :placeholder="i18n.t('key15')"
+                 v-validate:beneficialProportion.initial="'required|decimal|between:0, 100'" :data-vv-as="i18n.t('key15')" name="beneficialProportion"
                  :class="{'is-danger': errors.has('beneficialProportion') }">
           <span>%</span>
         </li>
       </ul>
       <ul v-else>
         <li>
-          <span class="name">姓名</span>
-          <input type="text" class="input" maxlength="30" v-model.trim="form.name" placeholder="请输入姓名"
-                 v-validate:name.initial="'required'" name="name" data-vv-as="请输入姓名"
+          <span class="name">{{$t("key28")}}</span>
+          <input type="text" class="input" maxlength="30" v-model.trim="form.name" :placeholder="i18n.t('key0')"
+                 v-validate:name.initial="'required'" name="name" :data-vv-as="i18n.t('key0')"
                  :class="{'is-danger': errors.has('name') }">
         </li>
         <li>
-          <span class="name">性别</span>
+          <span class="name">{{$t("key29")}}</span>
           <div class="_input">
             <c_gender @Click="checkgander" :gender="form.gender"></c_gender>
           </div>
         </li>
         <li>
-          <span class="name">是否投保人</span>
+          <span class="name">{{$t("key30")}}</span>
           <div class="_input">
             <!--<c_radio @Click="checkedSelf" :checked="form.self"></c_radio>-->
             <c_radioBlock v-model.trim = "form.self" :checked="false"></c_radioBlock>
           </div>
         </li>
         <li>
-          <span class="name">出生日期</span>
+          <span class="name">{{$t("key31")}}</span>
           <div class="input input_a">
             <datetime @on-change="cardtime"
                       clear-text=""
@@ -201,8 +201,8 @@
                       v-model.trim="form.birthday"
                       format="YYYY-MM-DD"
                       :title="timeTitle"
-                      confirm-text="确定"
-                      cancel-text="取消"
+                      :confirm-text="i18n.t('key1')"
+                      :cancel-text="i18n.t('key2')"
                       :start-date="cardBrith.stime"
                       :end-date="cardBrith.etime"
                       :min-year="cardBrith.minyear"
@@ -216,12 +216,12 @@
               name="birthday"
               v-model.trim="form.birthday[0]"
               v-validate
-              data-vv-as="请选择出生日期"
+              :data-vv-as="i18n.t('key3')"
               data-vv-rules="required">
           </div>
         </li>
         <li>
-          <popup-picker title="与被保险人关系" :data="relationList" @on-hide="onHide()" placeholder="请选择与被保险人关系"
+          <popup-picker :title="i18n.t('key4')" :data="relationList" @on-hide="onHide()" :placeholder="i18n.t('key5')"
                         @on-change="onChange" v-model.trim="form.relation"></popup-picker>
           <input
             class="hiddenInput"
@@ -230,15 +230,15 @@
             name="relation"
             v-model.trim="form.relation[0]"
             v-validate
-            data-vv-as="请选择与被保险人关系"
+            :data-vv-as="i18n.t('key5')"
             data-vv-rules="required">
         </li>
         <li v-if="hascardKind">
-          <span class="name">证件类型</span>
+          <span class="name">{{$t("key6")}}</span>
           <span type="text" class="input" v-if="form.cardKind">{{form.cardKind[0]}}</span>
         </li>
         <li v-else>
-          <popup-picker title="证件类型" :data="cardKindList" @on-hide="onHide('cardKind')" placeholder="请选择证件类型"
+          <popup-picker :title="i18n.t('key6')" :data="cardKindList" @on-hide="onHide('cardKind')" :placeholder="i18n.t('key7')"
                         @on-change="onChange" v-model.trim="form.cardKind"
           ></popup-picker>
           <input
@@ -248,18 +248,18 @@
             name="cardKind"
             v-model.trim="form.cardKind"
             v-validate
-            data-vv-as="请选择证件类型"
+            :data-vv-as="i18n.t('key7')"
             data-vv-rules="required">
         </li>
         <li>
-          <span class="name">证件号码</span>
+          <span class="name">{{$t("key32")}}</span>
           <span type="text" class="input" v-if="hascardKind">{{form.cardNum}}</span>
-          <input type="text" class="input" maxlength="30" v-model.trim="form.cardNum" placeholder="请输入证件号码"
-                 v-validate:cardNum.initial="'required|idcard'" data-vv-as="请输入证件号码" name="cardNum"
+          <input type="text" class="input" maxlength="30" v-model.trim="form.cardNum" :placeholder="i18n.t('key8')"
+                 v-validate:cardNum.initial="'required|idcard'" :data-vv-as="i18n.t('key8')" name="cardNum"
                  :class="{'is-danger': errors.has('cardNum') }" v-else>
         </li>
         <li>
-          <span class="name">有效期至</span>
+          <span class="name">{{$t("key33")}}</span>
           <div class="input">
             <datetime @on-change="cardtime"
                       clear-text=""
@@ -267,8 +267,8 @@
                       v-model.trim="form.indate"
                       format="YYYY-MM-DD"
                       :title="timeTitle"
-                      confirm-text="确定"
-                      cancel-text="取消"
+                      :confirm-text="i18n.t('key1')"
+                      :cancel-text="i18n.t('key2')"
                       :start-date="card.stime"
                       :end-date="card.etime"
                       :min-year="card.minyear"
@@ -282,20 +282,20 @@
               name="indate"
               v-model.trim="form.indate"
               v-validate
-              data-vv-as="请选择有效期"
+              :data-vv-as="i18n.t('key9')"
               data-vv-rules="required">
           </div>
           <div class="upload-img" @click="indate">
             <span class="icon-cricle" :class="{active: selected}"></span>
-            <span class="icon-text" :class="{'icon-text-active': selected}">长期</span>
+            <span class="icon-text" :class="{'icon-text-active': selected}">{{$t("key34")}}</span>
           </div>
         </li>
         <li v-if="hasnationality">
-          <span class="name">国籍</span>
+          <span class="name">{{$t("key10")}}</span>
           <span type="text" class="input">{{form.nationality}}</span>
         </li>
         <li v-else>
-          <popup-picker title="国籍" :data="nationalityList" @on-hide="onHide('nationality')" placeholder="请选择证件类型"
+          <popup-picker :title="i18n.t('key10')" :data="nationalityList" @on-hide="onHide('nationality')" :placeholder="i18n.t('key7')"
                         @on-change="onChange" v-model.trim="form.nationality"
           ></popup-picker>
           <input
@@ -305,25 +305,25 @@
             name="nationality"
             v-model.trim="form.nationality[0]"
             v-validate
-            data-vv-as="请选择国籍"
+            :data-vv-as="i18n.t('key11')"
             data-vv-rules="required">
         </li>
 
         <li>
-          <span class="name">职业</span>
-          <input type="text" class="input" maxlength="30" v-model="form.jobs" placeholder="请输入职业"
-                 v-validate:jobs.initial="'required'" data-vv-as="请输入职业" name="jobs"
+          <span class="name">{{$t("key36")}}</span>
+          <input type="text" class="input" maxlength="30" v-model="form.jobs" :placeholder="i18n.t('key16')"
+                 v-validate:jobs.initial="'required'" :data-vv-as="i18n.t('key16')" name="jobs"
                  :class="{'is-danger': errors.has('jobs') }">
         </li>
         <li>
-          <span class="name">手机号码</span>
-          <input type="tel" class="input" maxlength="30" v-maxLength v-model.trim="form.mobilphone" placeholder="请输入手机号码"
-                 v-validate:tel.initial="'required'" data-vv-as="请输入手机号码" name="tel"
+          <span class="name">{{$t("key37")}}</span>
+          <input type="tel" class="input" maxlength="30" v-maxLength v-model.trim="form.mobilphone" :placeholder="i18n.t('key17')"
+                 v-validate:tel.initial="'required'" :data-vv-as="i18n.t('key17')" name="tel"
                  :class="{'is-danger': errors.has('tel') }">
         </li>
         <li class="address-li">
-          <x-address title="地址" v-model.trim="form.address" :list="addressData"
-                     placeholder="省 /市 /区"></x-address>
+          <x-address :title="i18n.t('key18')" v-model.trim="form.address" :list="addressData"
+                     :placeholder="i18n.t('key19')"></x-address>
           <input
             class="hiddenInput"
             type="hidden"
@@ -331,22 +331,22 @@
             name="address"
             v-model.trim="form.address[0]"
             v-validate
-            data-vv-as="请选择地址"
+            :data-vv-as="i18n.t('key20')"
             data-vv-rules="required">
         </li>
         <li>
-          <span class="name">详细地址</span>
-          <input type="text" class="input" maxlength="30" v-model.trim="form.addressDetail" placeholder="请输入街道门牌信息"
-                 v-validate:addressDetail.initial="'required'" data-vv-as="请输入详细地址" name="addressDetail"
+          <span class="name">{{$t("key38")}}</span>
+          <input type="text" class="input" maxlength="30" v-model.trim="form.addressDetail" :placeholder="i18n.t('key21')"
+                 v-validate:addressDetail.initial="'required'" :data-vv-as="i18n.t('key22')" name="addressDetail"
                  :class="{'is-danger': errors.has('addressDetail') }">
         </li>
         <li>
-          <span class="name">邮编</span>
-          <input type="text" class="input" maxlength="6" v-model.trim="form.postcode" placeholder="请输入邮编（非必填）">
+          <span class="name">{{$t("key39")}}</span>
+          <input type="text" class="input" maxlength="6" v-model.trim="form.postcode" :placeholder="i18n.t('key23')">
         </li>
 
         <li>
-          <popup-picker title="受益顺序" :data="beneficialOrderList" @on-hide="onHide()" placeholder="请选择"
+          <popup-picker :title="i18n.t('key12')" :data="beneficialOrderList" @on-hide="onHide()" :placeholder="i18n.t('key13')"
                         @on-change="onChange" v-model.trim="form.beneficialOrder"
           ></popup-picker>
           <input
@@ -356,25 +356,27 @@
             name="beneficialOrder"
             v-model.trim="form.beneficialOrder[0]"
             v-validate
-            data-vv-as="请选择受益顺序"
+            :data-vv-as="i18n.t('key14')"
             data-vv-rules="required">
         </li>
         <li>
-          <span class="name">受益比例</span>
-          <input type="text" class="input" maxlength="30" v-model="form.beneficialProportion" placeholder="请输入受益比例"
-                 v-validate:beneficialProportion.initial="'required|decimal|between:0, 100'" data-vv-as="请输入受益比例" name="beneficialProportion"
+          <span class="name">{{$t("key35")}}</span>
+          <input type="text" class="input" maxlength="30" v-model="form.beneficialProportion" :placeholder="i18n.t('key15')"
+                 v-validate:beneficialProportion.initial="'required|decimal|between:0, 100'" :data-vv-as="i18n.t('key15')" name="beneficialProportion"
                  :class="{'is-danger': errors.has('beneficialProportion') }">
           <span>%</span>
         </li>
       </ul>
       <div class="button-wrapper">
-        <c_button val="确定修改" @Click="submit"></c_button>
+        <c_button :val="i18n.t('key24')" @Click="submit"></c_button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+ import i18n from "@/i18n"
+
   import {PopupPicker, Group, Datetime, XAddress, ChinaAddressV3Data, Value2nameFilter as value2name} from 'vux'
 
   const nowTime = function () {
@@ -386,10 +388,10 @@
       return {
         query: '',
         hascardKind: false,
-        cardKindList: [['身份证', '军人证', '护照']],
+        cardKindList: [[i18n.t("key40"), i18n.t("key41"), i18n.t("key42")]],
         hasnationality: false,
-        nationalityList: [['中国 ', '美国', '俄罗斯', '英国']],
-        relationList: [['父母', '兄妹', '朋友']],
+        nationalityList: [[i18n.t("key43"), i18n.t("key44"), i18n.t("key45"), i18n.t("key46")]],
+        relationList: [[i18n.t("key47"), i18n.t("key48"), i18n.t("key49")]],
         beneficialOrderList: [['1', '2', '3']],
         addressData: ChinaAddressV3Data,
         timeTitle: ' ',
@@ -411,10 +413,10 @@
         },
         form: {
           name: '',
-          gender: '男',
+          gender: i18n.t("key50"),
           self: true,
           birthday: '1980-01-01',
-          relation: ['父母'],
+          relation: [i18n.t("key47")],
           cardKind: [],
           indate: nowTime(),
           nationality: [],
@@ -470,9 +472,9 @@
       },
       checkgander (v) {
         if (v === 'M') {
-          this.form.gender = '男'
+          this.form.gender = i18n.t("key50")
         } else {
-          this.form.gender = '女'
+          this.form.gender = i18n.t("key51")
         }
       },
       checkedSelf (v) {

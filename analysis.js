@@ -5,26 +5,35 @@ function analyTemp (str, dset, replace = false) {
       let group = word.split('=')
       let body = group[1].replace(/(^\s?(\"|\')*)|((\"|\')*$)/g, '')
       let head = group[0].replace(/(^\s*)|(\s*$)/g, '')
-      if (!replace)  dset.add(body)
-      let key = dset[0][dset[1].findIndex((ele) => ele === body)]
-      let bb1 = ` :${head}="i18n.t('${key}')"`
-      return bb1
+      if (!replace) {
+        dset.add(body)
+      } else {
+        let key = dset[0][dset[1].findIndex((ele) => ele === body)]
+        let bb1 = ` :${head}="i18n.t('${key}')"`
+        return bb1
+      }
     })
   }
 
   var label = /(?<=<(\w+)>)[\u4e00-\u9fa5A-Za-z0-9-_－!,\/\|／~，。:：！、\.；（）\(\)“”"\s\]\[]*[\u4e00-\u9fa5]+[\u4e00-\u9fa5A-Za-z0-9!,\/\|／~，。：！、\.；（）\(\)“”"\s\]\[]*(?=<\/\1>)/ig
   str = str.replace(label, (word) => {
-    if (!replace)  dset.add(word)
-    let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-    return `{{$t("${key}")}}`
+    if (!replace) {
+      dset.add(word)
+    } else {
+      let key = dset[0][dset[1].findIndex((ele) => ele === word)]
+      return `{{$t("${key}")}}`
+    }
   })
   
   var reg = /(?<=\>)[\u4e00-\u9fa5A-Za-z0-9-_－!,\/\|／~，。:：！、\.；（）\(\)“”"\]\[\s]*[\u4e00-\u9fa5]+[\u4e00-\u9fa5A-Za-z0-9-_!,\/\|／~，。：！、\.；（）\(\)“”"\]\[\s]*(?=<)/img
   while ((arr = reg.exec(str)) != null){
     str = str.replace(arr[0], (word) => {
-      if (!replace)  dset.add(word)
-      let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-      return `{{$t("${key}")}}`
+      if (!replace) {
+        dset.add(word)
+      } else {
+        let key = dset[0][dset[1].findIndex((ele) => ele === word)]
+        return `{{$t("${key}")}}`
+      }
     })
   }
 
@@ -34,9 +43,12 @@ function analyTemp (str, dset, replace = false) {
     let rge = /('|")[^'"]*[\u4e00-\u9fa5]+[^'"]*\1/img
     while ((ar = rge.exec(arr[0])) != null) {
       str = str.replace(ar[0], (word) => {
-        if (!replace)  dset.add(word)
-        let key = dset[0][dset[1].findIndex((ele) => ele === word)]
-        return `$t("${key}")`
+        if (!replace) {
+          dset.add(word)
+        } else {
+          let key = dset[0][dset[1].findIndex((ele) => ele === word)]
+          return `$t("${key}")`
+        }
       })
     }
   }
@@ -71,9 +83,12 @@ function analyScript (str, dset, replace = false) {
     str = str.replace(arr[0], (word) => {
       // console.log(word)
       let res = word.replace(/(^\s?(\"|\')*)|((\"|\')*$)/g, '')
-      if (!replace)  dset.add(res)
-      let key = dset[0][dset[1].findIndex((ele) => ele === res)]
-      return `i18n.t("${key}")`
+      if (!replace) {
+        dset.add(res)
+      } else {
+        let key = dset[0][dset[1].findIndex((ele) => ele === res)]
+        return `i18n.t("${key}")`
+      }
     })
   }
   return str

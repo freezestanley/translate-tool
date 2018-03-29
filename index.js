@@ -4,7 +4,6 @@ const getWb = require('./newGetWb')
 const dir = require('./dir')
 const analy = require('./analysis')
 
-const dirRecord = dir.getDirTree(path.join(__dirname, '../src'))
 function translate (arr) {
   console.log('start.....')
   let dataset = new Set()
@@ -37,10 +36,6 @@ function translate (arr) {
   console.log('done.....')
 }
 
-dir.deleteFolder(path.join(__dirname, './neWrite'))
-// translate(dirRecord)
-// translate([path.join(__dirname, './demo.js')])
-
 async function replace(url, arr) {
   let dirdata = await dir.readXLSTFile(url)
   console.log('start.....')
@@ -59,7 +54,7 @@ async function replace(url, arr) {
         return analy.analyScript(ele, dirdata, true)
       })
       var bb = getWb.assemble(aa, ext)
-      var baseUrl = path.join(__dirname, '../src')
+      var baseUrl = path.join(__dirname)
       var url = path.join('./neWrite', path.relative(baseUrl, ele))
       dir.writeFile(url, bb)
       trans()
@@ -68,5 +63,10 @@ async function replace(url, arr) {
   trans()
   console.log('done.....')
 }
+const dirRecord = dir.getDirTree(path.join(__dirname))
+dir.deleteFolder(path.join(__dirname, './neWrite'))
+translate(dirRecord)
 replace(path.join(__dirname, './write.xlsx'), dirRecord)
-
+// 测试
+// translate([path.join(__dirname, './demo.vue')])
+// replace(path.join(__dirname, './write.xlsx'), [path.join(__dirname, './demo.vue')])
