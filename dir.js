@@ -113,7 +113,7 @@ async function writeLSTFile(path, data = []) {
   var sheet = workbook.addWorksheet('language');
   sheet.columns = [
     { header: 'key', key: 'key' },
-    { header: 'cn', key: 'cn' }
+    { header: 'FAN', key: 'FAN' }
   ]
   data.map((e) => {
     sheet.addRow(e)

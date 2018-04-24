@@ -16,3 +16,8 @@ replace(path.join(__dirname, './write.xlsx'), dirRecord)
 // 测试
 // translate([path.join(__dirname, './demo.vue')])
 // replace(path.join(__dirname, './write.xlsx'), [path.join(__dirname, './demo.vue')])
+
+// excel转为json文件，执行以下命令，excel路径和生成的文件路径在config.js里配置
+# node excelToJsonFile
+// 生成的json文件在result文件夹下
+

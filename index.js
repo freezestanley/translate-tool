@@ -3,6 +3,7 @@ const path = require('path')
 const getWb = require('./newGetWb')
 const dir = require('./dir')
 const analy = require('./analysis')
+const pathConfig = require('./config')
 
 function translate (arr) {
   console.log('start.....')
@@ -21,18 +22,14 @@ function translate (arr) {
       aa.script = aa.script.map((ele) => {
         return analy.analyScript(ele, dataset)
       })
-      // var bb = getWb.assemble(aa, ext)
-      // var baseUrl = path.join(__dirname, '../src')
-      // var url = path.join('./neWrite', path.relative(baseUrl, ele))
-      // dir.writeFile(url, bb)
       trans()
     }
   }
   trans()
   var rs = Array.from(dataset, (e, idx) => {
-    return {"cn": e, "key": `key${idx}`}
+    return {"FAN": e, "key": `key${idx}`}
   })
-  dir.writeLSTFile(path.join(__dirname + '/write.xlsx'), rs)
+  dir.writeLSTFile(pathConfig.excelPath, rs)
   console.log('done.....')
 }
 
@@ -68,5 +65,4 @@ dir.deleteFolder(path.join(__dirname, './neWrite'))
 // translate(dirRecord)
 // replace(path.join(__dirname, './write.xlsx'), dirRecord)
 // 测试
-translate([path.join(__dirname, './demo.vue')])
-// replace(path.join(__dirname, './write.xlsx'), [path.join(__dirname, './demo.vue')])
+translate([pathConfig.watiFiltProjectPath])
